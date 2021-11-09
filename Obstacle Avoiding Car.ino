@@ -1,12 +1,12 @@
 #include <Servo.h>
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
-#define Lpwm_pin  5     //pin of controlling speed---- ENA of motor driver board
-#define Rpwm_pin  6    //pin of controlling speed---- ENB of motor driver board
-int pinLB=2;             //pin of controlling turning---- IN1 of motor driver board
-int pinLF=4;             //pin of controlling turning---- IN2 of motor driver board
-int pinRB=7;            //pin of controlling turning---- IN3 of motor driver board
-int pinRF=8;            //pin of controlling turning---- IN4 of motor driver board
+#define Lpwm_pin  5    
+#define Rpwm_pin  6   
+int pinLB=2;            
+int pinLF=4;           
+int pinRB=7;        
+int pinRF=8;           
 
 Servo myservo;
 volatile int DL;
@@ -38,15 +38,12 @@ void Detect_obstacle_distance() {
   }
 }
 
-// Set the LCD address to 0x27 for a 16 chars and 2 line display
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void setup(){
 {
-  // initialize the LCD
   lcd.begin();
 
-  // Turn on the blacklight and print a message.
   lcd.backlight();
   lcd.print(" Ready to go :)");
   lcd.print(" BABY ON BOARD ");
@@ -55,12 +52,12 @@ void setup(){
    myservo.attach(A2);
   pinMode(A1, OUTPUT);
   pinMode(A0, INPUT);
- pinMode(pinLB,OUTPUT); // /pin 2
-  pinMode(pinLF,OUTPUT); // pin 4
-  pinMode(pinRB,OUTPUT); // pin 7
-  pinMode(pinRF,OUTPUT);  // pin 8
-  pinMode(Lpwm_pin,OUTPUT);  // pin 5 (PWM) 
-  pinMode(Rpwm_pin,OUTPUT);  // pin6(PWM) 
+ pinMode(pinLB,OUTPUT); 
+  pinMode(pinLF,OUTPUT); 
+  pinMode(pinRB,OUTPUT); 
+  pinMode(pinRF,OUTPUT);  
+  pinMode(Lpwm_pin,OUTPUT);  
+  pinMode(Rpwm_pin,OUTPUT);  
   DL = 0;
   DM = 0;
   DR = 0;
@@ -123,36 +120,36 @@ void loop(){
 }
 
 
-void Set_Speed(unsigned char pwm) //function of setting speed
+void Set_Speed(unsigned char pwm) 
 {
   analogWrite(Lpwm_pin,pwm);
   analogWrite(Rpwm_pin,pwm);
 }
-void advance()    //  going forward
+void advance()    
     {
-     digitalWrite(pinRB,LOW);  // making motor move towards right rear
+     digitalWrite(pinRB,LOW);  
      digitalWrite(pinRF,HIGH);
-     digitalWrite(pinLB,LOW);  // making motor move towards left rear
+     digitalWrite(pinLB,LOW);  
      digitalWrite(pinLF,HIGH); 
    
     }
-void turnR()        //turning right(dual wheel)
+void turnR()       
     {
-     digitalWrite(pinRB,LOW);  //making motor move towards right rear
+     digitalWrite(pinRB,LOW);  
      digitalWrite(pinRF,HIGH);
      digitalWrite(pinLB,HIGH);
-     digitalWrite(pinLF,LOW);  //making motor move towards left front
+     digitalWrite(pinLF,LOW);  
   
     }
-void turnL()         //turning left(dual wheel)
+void turnL()      
     {
      digitalWrite(pinRB,HIGH);
-     digitalWrite(pinRF,LOW );   //making motor move towards right front
-     digitalWrite(pinLB,LOW);   //making motor move towards left rear
+     digitalWrite(pinRF,LOW );   
+     digitalWrite(pinLB,LOW);  
      digitalWrite(pinLF,HIGH);
     
     }    
-void stopp()        //stop
+void stopp()  
     {
      digitalWrite(pinRB,HIGH);
      digitalWrite(pinRF,HIGH);
@@ -160,11 +157,11 @@ void stopp()        //stop
      digitalWrite(pinLF,HIGH);
     
     }
-void back()         //back up
+void back()
     {
-     digitalWrite(pinRB,HIGH);  //making motor move towards right rear     
+     digitalWrite(pinRB,HIGH);  
      digitalWrite(pinRF,LOW);
-     digitalWrite(pinLB,HIGH);  //making motor move towards left rear
+     digitalWrite(pinLB,HIGH);  
      digitalWrite(pinLF,LOW);
       
     }
