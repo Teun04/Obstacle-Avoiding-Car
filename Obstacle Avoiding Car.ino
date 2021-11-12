@@ -46,7 +46,6 @@ void setup(){
 
   lcd.backlight();
   lcd.print(" Ready to go :)");
-  lcd.print(" BABY ON BOARD ");
 }
    
    myservo.attach(A2);
